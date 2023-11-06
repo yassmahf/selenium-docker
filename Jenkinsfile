@@ -28,7 +28,7 @@ stages{
         }
 
        steps{
-         sh 'docker login -u ${DOCKER_HUB_USR} -p ${DOCKER_HUB_PSW}'
+        // sh 'docker login -u ${DOCKER_HUB_USR} -p ${DOCKER_HUB_PSW}'
          sh "docker push yassmahf/selenium"
 
        
@@ -40,7 +40,7 @@ stages{
 
 post{
     always{
-        sh "docker logout"
+       // sh "docker logout"
     }
 }
 
