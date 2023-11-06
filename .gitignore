@@ -1,1 +1,1 @@
-06-jenkins-ci-cd/selenium-docker/.gitignore
+/target/
