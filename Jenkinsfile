@@ -24,25 +24,25 @@ stages{
 
     stage('Push Image'){
         environment{
-           // DOCKER_HUB = credentials ('docker hub credentials')
+            DOCKER_HUB = credentials ('docker hub credentials')
         }
 
        steps{
-        // sh 'docker login -u ${DOCKER_HUB_USR} -p ${DOCKER_HUB_PSW}'
+         sh 'docker login -u ${DOCKER_HUB_USR} -p ${DOCKER_HUB_PSW}'
          sh "docker push yassmahf/selenium"
 
        
        
        }
-        
-
-    }
-
-post{
+        post{
     always{
-       // sh "docker logout"
+        sh "docker logout"
     }
 }
+
+    }
+
+
 
 }
 
