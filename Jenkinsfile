@@ -16,7 +16,7 @@ stages{
     stage('Build Image'){
 
         steps{
-            sh "docker build -t=yassmahf/selenium ."
+            sh "docker build -t=yassmahf98/selenium ."
 
         }
 
@@ -28,8 +28,8 @@ stages{
         }
 
        steps{
-         sh 'docker login -u ${DOCKER_HUB_USR} -p ${DOCKER_HUB_PSW}'
-         sh "docker push yassmahf/selenium"
+         sh 'echo ${DOCKER_HUB_PSW} | docker login -u ${DOCKER_HUB_USR} --password-stdin'
+         sh "docker push yassmahf98/selenium"
 
        
        
