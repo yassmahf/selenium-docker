@@ -1,0 +1,9 @@
+com/yassine/pages/flightreservation/FlightConfirmationPage.class
+com/yassine/pages/vendorportal/LoginPage.class
+com/yassine/pages/flightreservation/SelectFlightsPage.class
+com/yassine/App.class
+com/yassine/pages/flightreservation/RegistrationPage.class
+com/yassine/pages/flightreservation/FlightsSearchPage.class
+com/yassine/pages/vendorportal/DashboardPage.class
+com/yassine/pages/AbstractPage.class
+com/yassine/pages/flightreservation/RegistrationConfirmationPage.class
