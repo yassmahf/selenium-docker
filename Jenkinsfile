@@ -24,7 +24,7 @@ stages{
 
     stage('Push Image'){
         environment{
-            DOCKER_HUB = credentials ('docker hub credentials')
+           // DOCKER_HUB = credentials ('docker hub credentials')
         }
 
        steps{
