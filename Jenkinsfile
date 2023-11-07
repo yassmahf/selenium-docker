@@ -1,6 +1,6 @@
 pipeline{
 
-agent any
+agent none
 
 
 stages{
@@ -54,12 +54,7 @@ stages{
 }
 
 
- post {
-    
-        always {
-            sh 'docker logout'
-        }
-    }
+ 
 
 }
 
