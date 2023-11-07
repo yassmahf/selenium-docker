@@ -55,7 +55,7 @@ stages{
 
 
  post {
-    agent any
+    
         always {
             sh 'docker logout'
         }
