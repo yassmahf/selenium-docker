@@ -1,9 +1,1 @@
--The tests should run locally with the IDE before trying to run the jar files
-from the command line using this command:
-java -cp 'libs/*' org.testng.TestNG test-suites/flight-reservation.xml
-
-
-=> There is a problem with the chrome driver , the update is not working correctly
-Try to run the tests next time , and check if it updates correctly , or do it manually
-with link https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/mac-x64/chromedriver-mac-x64.zip
-
+There is a problem with yassmah98/selenium image. When using it , the tests d 

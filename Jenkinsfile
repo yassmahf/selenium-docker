@@ -49,7 +49,7 @@ stages{
                     sh "docker push yassmahf98/selenium:${env.BUILD_NUMBER} "
                     // Logout is not necessary here as the agent will be spun down, but it can be included for security
                 }
-            }
+            }  
         }
 }
 
