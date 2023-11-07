@@ -7,7 +7,7 @@ stages{
     stage('Build Jar'){
       agent{
         docker{
-            image 'maven:3.9.3-eclipse-temurin-17-focal'
+            image 'maven'
             args '-u root -v /tmp/m2:/root/.m2'
 
         }
@@ -32,23 +32,22 @@ stages{
 
     }
 
-    stage('Push Image'){
-       
-
-       steps{
-      
-
-       script{
-        docker.withRegistry('','dockerhub-creds'){
-            app.push("latest")
+    stage('Push Image') {
+            agent any // Same as above, ensure this agent can run Docker commands
+            environment {
+                // Injecting credentials into the environment, just like the working pipeline
+                DOCKER_HUB = credentials('dockerhub-creds')
+            }
+            steps {
+                script {
+                    // Login to Docker Hub securely
+                    sh 'echo $DOCKER_HUB_PSW | docker login -u $DOCKER_HUB_USR --password-stdin'
+                    // Push the image
+                    app.push("latest")
+                    // Logout is not necessary here as the agent will be spun down, but it can be included for security
+                }
+            }
         }
-       }
-
-       
-       
-       }
-       
-    }
 
 
 
