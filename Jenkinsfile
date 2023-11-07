@@ -1,64 +1,46 @@
+/*
+    Note:
+    
+    Windows users use "bat" instead of "sh"
+    For ex: bat 'docker build -t=vinsdocker/selenium .'
+    
+    Do not use "vinsdocker" to push. Use your dockerhub account
+*/
 pipeline{
 
-agent none
+    agent any
 
+    stages{
 
-stages{
-    stage('Build Jar'){
-      agent{
-        docker{
-            image 'maven:3.9.3-eclipse-temurin-17-focal'
+        stage('Build Jar'){
+            steps{
+                sh 'mvn clean package -DskipTests'
+            }
         }
-      }
-        steps{
-            sh "mvn clean package -DskipTests"
 
+        stage('Build Image'){
+            steps{
+                sh 'docker build -t=yassmahf98/selenium .'
+            }
+        }
 
+        stage('Push Image'){
+            environment{
+                // assuming you have stored the credentials with this name
+                DOCKER_HUB = credentials('dockerhub-creds')
+            }
+            steps{
+                sh 'echo ${DOCKER_HUB_PSW} | docker login -u ${DOCKER_HUB_USR} --password-stdin'
+                sh 'docker push yassmahf98/selenium'
+            }
         }
 
     }
- 
-    stage('Build Image'){
 
-        steps{
-           // sh "docker build -t=yassmahf98/selenium ."
-           script{
-            app = docker.build('yassmahf98/selenium')
-           }
-
+    post {
+        always {
+            sh 'docker logout'
         }
-
     }
-
-    stage('Push Image'){
-        environment{
-            DOCKER_HUB = credentials ('docker hub credentials')
-        }
-
-       steps{
-       //  sh 'echo ${DOCKER_HUB_PSW} | docker login -u ${DOCKER_HUB_USR} --password-stdin'
-       //  sh "docker push yassmahf98/selenium"
-
-       script{
-        docker.withRegistry('','docker hub credentials'){
-            app.push("latest")
-        }
-       }
-
-       
-       
-       }
-       
-    }
-
-
-
-}
-
-
-
-
-
-
 
 }
