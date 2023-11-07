@@ -25,7 +25,7 @@ stages{
         steps{
            // sh "docker build -t=yassmahf98/selenium ."
            script{
-            app = docker.build('yassmahf98/selenium')
+            app = docker.build('yassmahf98/selenium:latest')
            }
 
         }
@@ -43,13 +43,20 @@ stages{
                     // Login to Docker Hub securely
                     sh 'echo $DOCKER_HUB_PSW | docker login -u $DOCKER_HUB_USR --password-stdin'
                     // Push the image
-                    app.push("latest")
+                    //app.push("latest")
+                    sh 'docker push yassmahf98/selenium:latest'
+                    sh "docker tag yassmahf98/selenium:latest yassmahf98/selenium:${env.BUILD_NUMBER}"
+                    sh "docker push yassmahf98/selenium:${env.BUILD_NUMBER} "
                     // Logout is not necessary here as the agent will be spun down, but it can be included for security
                 }
             }
         }
 
-
+ post {
+        always {
+            sh 'docker logout'
+        }
+    }
 
 }
 
